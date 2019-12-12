@@ -79,12 +79,21 @@ vagrant --instances=2 --repo=/home/jdoe/keylime --cpus=4 --memory=4096  up --pro
 | NOTE: Customized args (`--instances`, `--repos` etc), come before the mainvagrant args (such as `up`, `--provider`) |
 | --- |
 
-Once the VM is started, vagrant ssh into the VM and run `sudo su -` to
-become root.
+Connect to the two VMs by bringing up to terminals already in the keylime_environment_setup directory and then run `vagrant --instances=2 ssh keylime1` in the first terminal and `vagrant --instances=2 ssh keylime2` in the second terminal
 
-The TPM emulator will be running.
+Navigate to the root directory in both VMs with the command `sudo su -`
 
-You can then start the various components using commands:
+Ensure keylime shared folder is working with `cd keylime_master` and then run `python3 setup.py install` to ensure the keylime codebase is loaded properly
+
+Then run `tpm2_getrandom 8 in each VM` to ensure the TPM emulator is running, the ouput should be similar to the following
+
+0x6F 0xA7 0xE0 0x28 0x98 0x33 0x62 0x78
+
+If function returns an error try to start the tpm server with `tpm_serverd` and try again
+
+For each VM, open 3 more Terminals so that you have 4 terminals connected to keylime1 and 4 terminals connected to keylime2. 
+
+Lastly, You can then start the various components using commands:
 
 ```
 keylime_verifier
