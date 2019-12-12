@@ -79,7 +79,9 @@ vagrant --instances=2 --repo=/home/jdoe/keylime --cpus=4 --memory=4096  up --pro
 | NOTE: Customized args (`--instances`, `--repos` etc), come before the mainvagrant args (such as `up`, `--provider`) |
 | --- |
 
-Connect to the two VMs by bringing up to terminals already in the keylime_environment_setup directory and then run `vagrant --instances=2 ssh keylime1` in the first terminal and `vagrant --instances=2 ssh keylime2` in the second terminal
+Connect to the two VMs by bringing up two terminals already in the `keylime_environment_setup` directory 
+
+Then run `vagrant --instances=2 ssh keylime1` in the first terminal and `vagrant --instances=2 ssh keylime2` in the second terminal
 
 Navigate to the root directory in both VMs with the command `sudo su -`
 
@@ -87,7 +89,7 @@ Ensure keylime shared folder is working with `cd keylime_master` and then run `p
 
 Then run `tpm2_getrandom 8 in each VM` to ensure the TPM emulator is running, the ouput should be similar to the following
 
-0x6F 0xA7 0xE0 0x28 0x98 0x33 0x62 0x78
+`0x6F 0xA7 0xE0 0x28 0x98 0x33 0x62 0x78`
 
 If function returns an error try to start the tpm server with `tpm_serverd` and try again
 
@@ -102,6 +104,7 @@ keylime_registrar
 
 keylime_node
 ```
+Note: To avoid reprovisioning your machines after use simple run `vagrant --instances=2 halt` when done with current session and `vagrant --instances=2 reload` to power the VM's back up 
 
 WebApp
 ------
